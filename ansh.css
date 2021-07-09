@@ -1,0 +1,49 @@
+/* 
+margin gives empty space around text
+padding is margin but inside the box
+color: ; // text colour
+background: ; // can be rgb tuple or name colour
+border-radius: 25px; /* for having rounded courners */
+
+/*  */
+
+
+
+.rounded_box {
+  border-radius: 25px; /* for having rounded courners */
+  background-color: lightgrey;
+  width: 20%;
+  border: 20px solid green;
+  padding: 50px;
+  margin: 20px;
+}
+
+
+body {
+  background: rgb(255, 255, 255);
+  color: black;
+  font-family: Helvetica-neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 20px;
+}
+
+section {
+  background: white;
+  color: black;   /*  text colour */
+  padding: 20px;
+}
+
+footer {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+}
+
+
+

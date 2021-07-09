@@ -1,0 +1,225 @@
+body{
+  margin:0;
+  background: #222 ;
+  font-family: 'Work Sans', sans-serif; ;
+  font-weight: 300  ;
+}
+
+.container{
+  width: 80%;
+  margin: 0 auto; /* auto horizontally centres the element within its container*/
+}
+
+header{
+  background: #55d6aa;
+}
+header::after{ /* this adds content to the header element but after the content that is in that element */
+content: '';
+display: table;
+clear:both;
+}
+
+.logo{
+  float:left; /* moves logo to the left of the container
+  padding: 10px 0; */
+}
+
+nav { 
+  float: right; /*moves the links to the right*/
+}
+
+nav ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+nav li{
+  display: inline-block;
+  margin-left: 70px; /* if did other margin, it moves the rightmost tab to the left, wont be inline with text*/
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a{
+  color: #444;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+nav:hover{
+  color: #000;
+}
+
+nav a::before{ /* i.e in the link before the text*/
+content: '';
+display: block;
+height: 5px;
+background-color: #444;
+
+position: absolute;
+top: 0; /* moves to top*/
+width: 0%; /*starts of invisible, and when u hover over appears*/
+
+transition: all ease-in-out 250ms
+}
+
+nav a:hover::before{
+  width: 100% /* when u hover appear, slides to 100%*/
+}
+
+
+/* .rounded_box {
+  border-radius: 25px; /* for having rounded courners */
+  /*background-color: lightgrey;
+  width: 20%;
+  border: 20px solid green;
+  padding: 50px;
+  margin: 20px;
+} */
+
+
+body {
+  background: rgb(255, 255, 255);
+  color: black;
+  font-family: Helvetica-neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 20px;
+}
+
+section {
+  background: white;
+  color: black;   /*  text colour */
+  border: 5px solid black;
+  margin: 20px;
+  
+}
+
+footer {
+  background: black;
+  color: white;
+  padding: 20px 40px;
+}
+
+
+
+
+/* 
+.rounded_box {
+  border-radius: 25px; /* for having rounded courners */
+  /*
+  background-color: lightgrey;
+  width: 20%;
+  border: 20px solid green;
+  padding: 50px;
+  margin: 20px;
+} 
+*/
+
+
+body {
+  background: rgb(255, 255, 255);
+  color: black;
+  font-family: Helvetica-neue, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  background: black;
+  color: white;
+  padding: 20px;
+}
+
+section {
+  background: white;
+  color: black;   /*  text colour */
+  padding: 20px;
+}
+
+footer {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+}
+
+
+
+.img12{
+ position: absolute;
+ top:0+400;
+ left:0;
+ 
+}
+
+.img18{
+ position: absolute;
+ top:395+400;
+ left:0;
+ 
+}
+.img6{
+  position: absolute;
+  left:0;
+  height: 400+400;
+  top:4000;
+  
+}
+
+.img9{
+  position: absolute;
+  top:1150+400;
+  
+}
+
+.img10{
+  position: absolute;
+  top:2400+400;
+  left:0;
+  
+  
+}
+
+
+
+.img17{
+ position: absolute;
+ top:3220+400;
+ left:0;
+ 
+}
+
+
+
+.img21{
+ position: absolute;
+ top:2000+400;
+ left:0;
+ 
+
+}
+
+.img22{
+ position: absolute;
+ top:1450+400;
+ left:0;
+ 
+ 
+}
+
+.img23{
+ position: absolute;
+ top:2820+400;
+ left:0;
+ 
+}
+
+

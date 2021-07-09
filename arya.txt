@@ -1,0 +1,107 @@
+https://docs.google.com/document/d/19WkkJQ35pH-ic79oUdmRr8USoYFqnxJdufN7uqdYHjc/edit
+
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>cool website</title>
+    <link href="style.css" rel="stylesheet" type="text/css" /> 
+</head>
+
+
+
+<body>
+<header>
+  <div class = 'container'>
+    <img src = '#' alt = 'logo' class = 'logo'> // Logo or image to put on the nav bar
+
+    <nav> //nav tag defines a set of navigation links - used when there is a block of links
+      <ul>
+        <li><a href = '#'>Bla</a></li>
+        <li><a href = '#'>Bla</a></li>
+        <li><a href = '#'>Bla</a></li>
+        <li><a href = '#'>Bla</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+</body>
+</html>
+
+
+
+//css
+body{
+  margin:0;
+  background: #222 ;
+  font-family:   ;
+  font-weight:   ;
+}
+
+.container{
+  width = 80%
+  margin: 0 auto; // auto horizontally centres the element within its container
+}
+
+header{
+  background: ;
+}
+
+header::after{ // this adds content to the header element but after the content that is in that element
+content: '';
+display: table;
+clear:both;
+}
+
+.logo{
+  float:left; // moves logo to the left of the container
+  padding: 10px 0; 
+}
+
+nav { 
+  float: right; //moves the links to the right
+}
+
+nav ul{
+  margin = 0;
+  padding = 0;
+  list-style: none;
+}
+
+nav li{
+  display: inline-block;
+  margin-left: 70px; // if did other margin, it moves the rightmost tab to the left, wont be inline with text
+  padding-top: 23px;
+
+  position: relative;
+}
+
+nav a{
+  colour: #444;
+  text-decoration: none;
+  text-transfrom: uppercase;
+  font-size: 14px;
+}
+
+nav:hover{
+  colour: #000;
+
+}
+
+nav a::before{ // i.e in the link before the text
+content: '';
+display: block;
+height: 5px;
+background-colour: #444;
+
+position: absolute;
+top: 0; // moves to top
+width: 0%; //starts of invisible, and when u hover over appears
+
+transition: all ease-in-out 250ms
+}
+
+nav a:hover::before{
+  width: 100% // when u hover appear, slides to 100%
+}
