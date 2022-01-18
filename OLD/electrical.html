@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>cool website</title>
+    <link href="style.css" rel="stylesheet" type="text/css" /> 
+</head>
+
+<body>
+<header>
+  <div class = 'container'>
+    This is cansat website
+    <nav> 
+      <ul>
+        <li><a href = 'index.html'>Home</a></li>
+        <li><a href = 'electrical.html'>Electrical</a></li>
+
+        <li><a href = 'outreach.html'>Outreach</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<!-- use the section tab and then paste all the actual content in it -->
+
+
+
+
+<section>
+<h2><u>
+Component Selection:
+</u></h2>
+<br>
+
+<h4><u> 
+  Arduino Nano BLE 33 Sense:
+</u></h4>
+<p>
+We chose to use the Arduino Nano BLE 33 sense rather than the Arduino Uno provided. There were 2 main reasons we chose to use a different Arduino than the one provided; Firstly, the Uno, is 68.6x53.4mm, as stated on the official Arduino website, whereas the nano is just 45x18 mm, which means there would be a lot more empty space in the cansat, which is desirable as this means we can easily wire up the Arduino to its external components. 
+</p>
+<p>
+Furthermore, our nano contains 3 sensors inbuilt, which not only means that we can use more sensors without taking up extra space in the can, but there is less chance of error since the sensors do not require extra wiring or significantly more power, and so these overwhelming advantages are the reason we chose the Arduino nano ble 33 sense.
+</p>
+<p>
+The only disadvantage associated with this board is that there is not yet a SoftwareSerial library, which meant that we could not use as many components with a serial connection as we could with an uno, but this disadvantage did not affect us as much as, due to the fact we had internal sensors, we had few external components so this was not a problem for us.
+</p>
+
+<h4><u> 
+LPS22HB Barometer:
+</h4></u> 
+<p>
+The Barometer sensor is built into the Arduino BLE 33 Sense and uses a silicon membrane sensing element for MEMS pressure sensors. The wheatstone bridge piezo resistances are affected by membrane deflection and their change in resistance is converted to a value for pressure through the IC (Integrated Circuit) interface (LPS22HB Datasheet, 2017).
+</p>
+<h4><u> 
+HTS221 Humidity and Temperature Sensor:
+</h4></u> 
+<p>
+This sensor uses a polymer dielectric capacitor structure, capable of measuring variations in humidity and temperature.and the IC interface is able to convert the value from analog to a digital output (HTS221 Datasheet, 2016).
+LSM9DS1 Magnetometer, Accelerometer and Gyroscope:
+</p>
+<p>
+The LSM9DS1 inertial module is capable of measuring motion through magnetic orientation, acceleration and direction in all three dimensions. However, as shown by the flowchart for this module, the three components are treated separately and require different functions and libraries to extract relevant data.
+3.7V Li-Po battery:
+</p>
+<p>
+As the operating voltage was only 3.3V, space and money were also saved on the LiPo battery – as a single cell battery would be sufficient to power it unlike the Arduino Micro. Similar to the Arduino Nano BLE 33 Sense. 
+As mentioned, a 3.3V supply was powered by a single cell (3.7V) Lithium Polymer (LiPo) battery. A single cell battery provided a sufficient EMF for the CanSat, as all the required components were chosen such that they only required a 3.3V supply. Therefore, space consumed by the battery and the LiPo batteries were used due to their energy density – they are able to store a lot of chemical energy in little space. LiPo batteries are also easy to use, remove and charge and can easily be connected to the circuit.
+</p>
+<h4><u> 
+Neo 6M GPS:
+</h4></u> 
+<p>
+The Neo 6M GPS had similar advantages (Components101, 2018) when it comes to size, at 16 x 12.2 x 2.4 mm. Furthermore, as it was able to withstand an acceleration of 4g, it was suitable for the project. In addition to the fact that it was compatible with a 3.3V input, as it was significantly cheaper than other GPSs, the Neo 6M GPS was the final choice. While obstacles to the GPS can reduce its accuracy, as a plastic casing was used for the CanSat rather than metal, this reduced the interference on the GPS. However, use of the GPS did not go as planned as a loose wire meant that no data was recorded. This problem was unrelated to the choice of GPS itself.
+</p>
+<h4><u> 
+Piezo buzzer:
+</h4></u> 
+<p>
+The piezo buzzer was used as a mechanism to locate the CanSat once it had fallen to the ground and was covered by grass/plants. It was connected to the circuit via a digital PWM pin, and was chosen due to its cheap cost and size. Rather than using a speaker, a piezo buzzer proved to be more than sufficient as the sound made by the buzzer did not matter as long as it was audible. 
+</p>
+<h4><u> 
+Slide Switch:
+</h4></u> 
+<p>
+The slide switch was used to switch the circuit on and off easily and was a requirement on the CanSat guidelines. Furthermore, a slide switch was preferred to a push switch, due to its ease of use.
+</p>
+<h4><u> 
+MQ4 Gas Sensor:
+</h4></u> 
+<p>
+On Mars, there is a significant amount of methane in the atmosphere. Since methane is known to be released only by volcanoes or living organisms, conclusions could be drawn based on methane concentrations. Specifically, the CanSat can go to an area where a volcano lies, and if methane concentrations spike, it can be established that the volcano is active. However, more interestingly, if the CanSat passes by an area where no volcanoes lie and the methane concentrations spike, it can be discerned that the reason for that spike was due to living organisms that must exist on Mars.
+</p>
+<p>
+CO2 could have been used to draw the same conclusions; however, after considerable research and deliberation, it was found that CO2 sensors were vastly outside the price range provided and thus unavailable. Furthermore, SO2 may have been a better indicator of whether a volcano is active, but the sensors were far too large for the limited volume that was defined for this project. As a result, an MQ4 gas sensor was chosen for the secondary mission.
+</p>
+<p>
+However, the accuracy of data was limited by the need for sensor calibration at 5000ppm (Components101, 2018a). This was not feasible due to the lack of equipment available at school to produce and maintain a concentration of 5000ppm of methane. Furthermore, accuracy was further limited as a preheat time of 24 hours was needed, but this was not possible.
+</p>
+<p>
+The sensor contains a sensing element, mainly aluminium oxide-based ceramic; it is coated with tin dioxide wrapped in a stainless-steel wire mesh. The sensor element is connected to six legs. Two of the outputs control the heating of the sensor, and the other four will be used for the output signals (MQ4 Gas Sensor - Working Principle & Its Applications, 2021).
+</p>
+<p>
+Oxygen is absorbed on the surface of the sensing element when it is heated in the air at high temperatures. The donor electrons in tin oxide are drawn towards this oxygen, thus preventing the charge from flowing.
+</p>
+<p>
+In the case of the reducing gases, the oxygen atoms react with the gases. This reduces the surface density of the absorbed oxygen, allowing current to now flow through the sensor, generating an analogue voltage value.
+</p>
+<p>
+These voltage values can be measured to find the concentration of a particular gas. Voltage values have a positive correlation with the concentration of gases.
+(How MQ4 Gas/Smoke Sensor Works? & Interface it with Arduino, 2021)
+</p>
+</section>
+
+<section>
+<h2> <u>
+  Problems we overcame: 
+</u> </h2>
+<p>
+Furthermore, we found issues with finding appropriate documentation relating to our Arduino, which was a Nano BLE 33. The vast majority of the code discovered was for the Arduino Uno, which meant we were left in the dark for a lot of the components. This was, naturally, a disadvantage that slowed our progress, but it was overcome with hard work and dedication, and we spent time analysing uno code, and writing a lot of our own in order to ensure that our components worked with our Arduino.
+</p>
+<p>
+Moreover, there were issues concerning how the components would be connected to the Arduino itself. This was highly problematic since our secondary mission meant that there were more components than 3.3 Volts and Ground Pins. As a result, an entirely new circuit had to be designed using diodes and resistors onto a PCB to overcome this issue. Once again, there was little documentation online instructing us on how to carry this out. 
+</p>
+<p>
+Consequently, by applying our various knowledge about physics led to a solution, along with trial and error of course. We achieved our overall goal of having a working circuit, where we have complete control over the flow of current by connecting the components in parallel and connecting the GND pins together and into one pin, along with the use of diodes in order to restrict charge from flowing backwards. We tested multiple methods and experimented using 2 LEDs and a buzzer to see if the components could operate independently of each other despite being connected to the same V and GND. 
+</p>
+
+</section> 
+
+
+
+
+
+<footer></footer>
+</body>
+</html>
+
+
+
+
