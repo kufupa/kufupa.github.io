@@ -1,6 +1,9 @@
-// Declare all variables
+// Declare all constants
 let canvasWidth = 1600;
 let canvasHeight = 900;
+let FPS = 60;
+
+// Background loop variables
 let gameState = null;
 let paused = false;
 
@@ -14,11 +17,15 @@ let leaderBoardScores = []; // Scores sorted ascendingly
 let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
+// Menu game state variables
+let screenVariable = 0; // Which screen to display
+let mouseHeld = false;
+
 // Load and display title screen
 function displayTitle(){ 
   background(0); // Apply black background
   
-  loadImage("Assets/titleScreen.jpg", // Load screen
+  titleImage = loadImage("Assets/titleScreen.jpg", // Load screen
     titleImage => { // Display it on successful loading
       image(titleImage, 
         width/2 - titleImage.width/2, // position in center of window
@@ -109,7 +116,27 @@ function displayLeaderboard(names, scores){
   
 }
 
-function setup() {
+function menuScreens(screenVariable){ // For what to display on screen
+    if (screenVariable == 0){
+      displayAndCentreImage(titleImage)
+    } 
+    else if (screenVariable == 1) {
+      displayAndCentreImage(instructionsImg)
+    } 
+    else if (screenVariable == 2) {
+      displayLeaderboard(leaderBoardNames, leaderBoardScores)
+    } 
+    else if (screenVariable == 3) {
+      displayAndCentreImage(difficultyImg) // FILLER FOR DIFFICULTY FUNCTION
+    } 
+    else if (screenVariable == 4) {
+      print("HI") // Test if executed before wanted
+    }
+}
+
+
+function setup() { // Setup function - called once only
+  frameRate(FPS); // Refresh only at stated FPS
   createCanvas(canvasWidth, canvasHeight);
   displayTitle();
   
@@ -124,23 +151,6 @@ function setup() {
 }
 
 
-// Load screenVariable
-// Load Space bar, mouseLeftClick
-// If Space bar or mouseLeftClick are True
-// 	Increment screenVariable
-// If screenVariable == 0:
-// Display game information screen
-// If screenVariable == 1:
-// 	Display Controls screen
-// If screenVariable == 2:
-// 	Load leaderboard screen
-// 	Set scorePosX, scorePosY, playerPosX, playerPosY to 0
-// 	For each score and player in LeaderboardText
-// 		Display Score at (scorePosX, scorePosY)
-// 		Display Player at (playerPosX, playerPosY)
-// 		Increment scorePosY and playerPosY 
-// If screenVariable == 3:
-// 	Display Difficulty screen
 // 	Show difficulty slider
 // If screenVariable == 4:
 // 	Save value difficulty slider to global constant DIFFICULTY
@@ -150,7 +160,22 @@ function setup() {
 // 		Set Game_state = START_GAME
 
 
-function draw() {
-  displayLeaderboard(leaderBoardNames, leaderBoardScores);
-  // background(0);
+
+function draw() { // Background loop - 60 times per second
+  // Execute code relevant to current game state
+  if (gameState == "MENU"){ 
+    // Update screen variable if left mouse click pressed
+    if (mouseIsPressed  && mouseButton === LEFT){
+      // Only increment if mouse is held
+      if (!mouseHeld) {
+        // Increment and ensure its not > 2 using modulo operator(%)
+        screenVariable = (screenVariable + 1) % 5; 
+      }  
+      mouseHeld = true; // Since button has now been clicked
+    } else { // LMC not clicked
+      mouseHeld = false;
+    } 
+    background(0); // Clear anything previously on screen
+    menuScreens(screenVariable); // Display new relevant item to screen
+  }
 }
