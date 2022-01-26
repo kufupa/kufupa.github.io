@@ -130,7 +130,7 @@ function menuScreens(screenVariable){ // For what to display on screen
       displayAndCentreImage(difficultyImg) // FILLER FOR DIFFICULTY FUNCTION
     } 
     else if (screenVariable == 4) {
-      print("HI") // Test if executed before wanted
+      print("HI") // Test if executed before wanted - PASSED
     }
 }
 
