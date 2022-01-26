@@ -61,11 +61,14 @@ function getTopPlayers(number) {
       } else{ // Its a score
         leaderBoardScores.push( int(leaderBoardData[i]) )     
       }
-      
-    }
+    } 
   }
   
-  return (leaderBoardNames, leaderBoardScores)
+  // Spliced to return 10 items from end of array - so only top 10 items 
+  return (
+    leaderBoardNames = leaderBoardNames.splice(leaderBoardNames.length-10,10), 
+    leaderBoardScores = leaderBoardScores.splice(leaderBoardNames.length-10,10)
+  )
 }
 
 function loadInstructions(){
@@ -85,19 +88,23 @@ function displayAndCentreImage(Img){
 
 function displayLeaderboard(names, scores){
   background(0); // Apply black background & cover anything previously displayed
+  let xDistance = 175; // How far apart the names are from the scores
+  let yDistance = 70; // Vertical spacing between records
+  let xPos = width/2 - (xDistance/2|0); // Center the text horizontally
+  let yPos = yDistance + 20; // Vertically where the text begins being written from
   
-  let xDistance = 175;
-  let yDistance = 75;
-  let xPos = width/2;
-  let yPos = yDistance + 20;
+  textSize(75); // Size of text - p5js procedure
+  fill(200, 200, 255); // Colour of text - lavender
+  text("HIGH SCORES", xPos-xDistance, yPos)
+  yPos += yDistance + 50
   
+  fill(0, 200, 200); // Colour of text - Cyan
+  textSize(70); // Size of text - p5js procedure
   
-  fill(0, 102, 153);
-  textSize(75)
-  for(let i=0; i<names.length; i++){
-    text(names[i], xPos-xDistance, yPos);
-    text(scores[i], xPos+xDistance, yPos);
-    yPos += yDistance;
+  for(let i=names.length-1; i>-1; i--){ // Loop through all the different scores
+    text(names[i], xPos-xDistance, yPos); // Display name
+    text(scores[i], xPos+xDistance, yPos); // Display text
+    yPos += yDistance; // Update vertical position for next pair of data
   }
   
 }
@@ -116,8 +123,31 @@ function setup() {
   
 }
 
-// backgroundLoop(gameState) 
 
+// Load screenVariable
+// Load Space bar, mouseLeftClick
+// If Space bar or mouseLeftClick are True
+// 	Increment screenVariable
+// If screenVariable == 0:
+// Display game information screen
+// If screenVariable == 1:
+// 	Display Controls screen
+// If screenVariable == 2:
+// 	Load leaderboard screen
+// 	Set scorePosX, scorePosY, playerPosX, playerPosY to 0
+// 	For each score and player in LeaderboardText
+// 		Display Score at (scorePosX, scorePosY)
+// 		Display Player at (playerPosX, playerPosY)
+// 		Increment scorePosY and playerPosY 
+// If screenVariable == 3:
+// 	Display Difficulty screen
+// 	Show difficulty slider
+// If screenVariable == 4:
+// 	Save value difficulty slider to global constant DIFFICULTY
+// 	Display start button
+// If screenVariable == 4:
+// 	if mouseX and mouseY are on start button
+// 		Set Game_state = START_GAME
 
 
 function draw() {
