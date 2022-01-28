@@ -6,3 +6,56 @@ html, body { /* Remove default spacing in web page, so canvas fills up whole scr
 canvas { /* Display items using p5js correctly */
   display: block;
 }
+
+
+/* Style for the slider as a whole 
+  - to change the default values */
+.difficultySlider {
+  width: 300px;
+  margin: 10px 0;
+  background-color: transparent;
+  /* No special styling is applied - allow changes to go through as expected */
+  -webkit-appearance: none;
+}
+
+/* Style user is interacting with the slider 
+  - reset the default highlighting to off/none */
+.difficultySlider:focus {
+  outline: none;
+}
+
+/* Style of the groove in which the slider moves */
+.difficultySlider::-webkit-slider-runnable-track { 
+  background: #ece06c;
+  border: 10px solid #ffffff;
+  border-radius: 25px;
+  width: 100%;
+  height: 50px;
+  cursor: pointer;
+}
+
+/* The thumb (item) that the user can drag and move */
+.difficultySlider::-webkit-slider-thumb {
+  margin-top: -15px;
+  width: 60px;
+  height: 60px;
+  background: #b8ac54;
+  border: 10px solid #ffffff;
+  border-radius: 50px;
+  cursor: pointer;
+  /* No special styling is applied - allow changes to go through as expected */
+  -webkit-appearance: none; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

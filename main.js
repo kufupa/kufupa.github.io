@@ -18,8 +18,10 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 0; // Which screen to display
+let screenVariable = 3; // Which screen to display
 let mouseHeld = false;
+let difficultySlider; // Assigned to difficulty slider in background loop 
+
 
 // Load and display title screen
 function displayTitle(){ 
@@ -118,22 +120,37 @@ function displayLeaderboard(names, scores){
 
 function menuScreens(screenVariable){ // For what to display on screen
     if (screenVariable == 0){
-      displayAndCentreImage(titleImage)
+      displayAndCentreImage(titleImage);
     } 
     else if (screenVariable == 1) {
-      displayAndCentreImage(instructionsImg)
+      displayAndCentreImage(instructionsImg);
     } 
     else if (screenVariable == 2) {
-      displayLeaderboard(leaderBoardNames, leaderBoardScores)
+      displayLeaderboard(leaderBoardNames, leaderBoardScores);
     } 
     else if (screenVariable == 3) {
-      displayAndCentreImage(difficultyImg) // FILLER FOR DIFFICULTY FUNCTION
+      displayAndCentreImage(difficultyImg); // Background
+      displayDifficultySlider();
     } 
     else if (screenVariable == 4) {
-      print("HI") // Test if executed before wanted - PASSED
     }
 }
 
+function displayDifficultySlider(){
+  fill(0); // make box black
+  rect(width/2-140, height/2-30, 290, 70);
+  difficultySlider.position(width/2-150, height/2-30); 
+  // difficulty = difficultySlider.value();
+}
+
+// let slider;
+// function setup() {
+// }
+
+// function draw() {
+//   let val = slider.value();
+//   background(val);
+// }
 
 function setup() { // Setup function - called once only
   frameRate(FPS); // Refresh only at stated FPS
@@ -147,6 +164,11 @@ function setup() { // Setup function - called once only
   loadDifficulty();
   
   gameState = "MENU"; // change gamestate
+  
+  // Min:1, Max:9, Default:5, Step:10
+  difficultySlider = createSlider(1, 9, 5, 1); 
+  difficultySlider.addClass("difficultySlider");
+  
   
 }
 
@@ -162,6 +184,7 @@ function setup() { // Setup function - called once only
 
 
 function draw() { // Background loop - 60 times per second
+  
   // Execute code relevant to current game state
   if (gameState == "MENU"){ 
     // Update screen variable if left mouse click pressed
@@ -177,5 +200,6 @@ function draw() { // Background loop - 60 times per second
     } 
     background(0); // Clear anything previously on screen
     menuScreens(screenVariable); // Display new relevant item to screen
+     
   }
 }
