@@ -18,10 +18,10 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 3; // Which screen to display
+let screenVariable = 0; // Which screen to display
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
-
+let DIFFICULTY; // Difficulty value saved from slider
 
 // Load and display title screen
 function displayTitle(){ 
@@ -104,8 +104,8 @@ function displayLeaderboard(names, scores){
   
   textSize(75); // Size of text - p5js procedure
   fill(200, 200, 255); // Colour of text - lavender
-  text("HIGH SCORES", xPos-xDistance, yPos)
-  yPos += yDistance + 50
+  text("HIGH SCORES", xPos-xDistance, yPos);
+  yPos += yDistance + 50;
   
   fill(0, 200, 200); // Colour of text - Cyan
   textSize(70); // Size of text - p5js procedure
@@ -119,28 +119,43 @@ function displayLeaderboard(names, scores){
 }
 
 function menuScreens(screenVariable){ // For what to display on screen
-    if (screenVariable == 0){
+    if (screenVariable == 0){ // Loading screen
       displayAndCentreImage(titleImage);
     } 
-    else if (screenVariable == 1) {
+    else if (screenVariable == 1) { // Instructions screen
       displayAndCentreImage(instructionsImg);
     } 
-    else if (screenVariable == 2) {
+    else if (screenVariable == 2) { // Leaderboard screen
       displayLeaderboard(leaderBoardNames, leaderBoardScores);
     } 
-    else if (screenVariable == 3) {
+    else if (screenVariable == 3) { // Difficulty screen
       displayAndCentreImage(difficultyImg); // Background
-      displayDifficultySlider();
+      displayDifficultySlider(); // Show the slider
+      displayStartButton(); // Show the start button
+      
     } 
-    else if (screenVariable == 4) {
-    }
+  
 }
 
 function displayDifficultySlider(){
-  fill(0); // make box black
-  rect(width/2-140, height/2-30, 290, 70);
+  fill(0); // make rect black
+  rect(width/2-140, height/2-30, 290, 70); // Cover up anything behind it
   difficultySlider.position(width/2-150, height/2-30); 
-  // difficulty = difficultySlider.value();
+}
+
+
+function displayStartButton(){
+  // Set position so it can be displayed
+  startButton.position(width/2-100, height/2+175); 
+}
+
+function exitMenuState(){
+  // Save the current difficulty value
+  DIFFICULTY = difficultySlider.value(); 
+  // Hide slider and button
+  difficultySlider.remove();
+  startButton.remove();
+  gameState = "START_GAME"; // change gamestate
 }
 
 // let slider;
@@ -165,21 +180,19 @@ function setup() { // Setup function - called once only
   
   gameState = "MENU"; // change gamestate
   
-  // Min:1, Max:9, Default:5, Step:10
+  // Create slider with Min:1, Max:9, Default:5, Step:10
   difficultySlider = createSlider(1, 9, 5, 1); 
-  difficultySlider.addClass("difficultySlider");
+  // Add CSS styling to slider
+  difficultySlider.addClass("difficultySlider"); 
   
+  // Create button with text "PLAY"
+  startButton = createButton("PLAY");
+  // Add CSS styling to button
+  startButton.addClass("startButton"); 
+  // Add callback for when it is pressed
+  startButton.mousePressed(exitMenuState);
   
 }
-
-
-// 	Show difficulty slider
-// If screenVariable == 4:
-// 	Save value difficulty slider to global constant DIFFICULTY
-// 	Display start button
-// If screenVariable == 4:
-// 	if mouseX and mouseY are on start button
-// 		Set Game_state = START_GAME
 
 
 
@@ -191,8 +204,8 @@ function draw() { // Background loop - 60 times per second
     if (mouseIsPressed  && mouseButton === LEFT){
       // Only increment if mouse is held
       if (!mouseHeld) {
-        // Increment and ensure its not > 2 using modulo operator(%)
-        screenVariable = (screenVariable + 1) % 5; 
+        // Increment
+        screenVariable = screenVariable + 1; 
       }  
       mouseHeld = true; // Since button has now been clicked
     } else { // LMC not clicked
@@ -202,4 +215,11 @@ function draw() { // Background loop - 60 times per second
     menuScreens(screenVariable); // Display new relevant item to screen
      
   }
+  
+  else if (gameState == "START_GAME"){
+    
+  }
+  
 }
+
+

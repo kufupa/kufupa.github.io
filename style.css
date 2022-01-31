@@ -11,51 +11,80 @@ canvas { /* Display items using p5js correctly */
 /* Style for the slider as a whole 
   - to change the default values */
 .difficultySlider {
+  /* Ensure it is wide enough for user to change values easily */
   width: 300px;
   margin: 10px 0;
+  /* So it doesnt unexpectdly cover up screen */
   background-color: transparent;
   /* No special styling is applied - allow changes to go through as expected */
   -webkit-appearance: none;
 }
 
-/* Style user is interacting with the slider 
+/* Focus - Style when user is interacting with the slider 
   - reset the default highlighting to off/none */
 .difficultySlider:focus {
   outline: none;
 }
 
-/* Style of the groove in which the slider moves */
+/* Track - Style of the groove in which the slider moves */
 .difficultySlider::-webkit-slider-runnable-track { 
+  /* Vibrant yellow for contrast */
   background: #ece06c;
+  /* Add white outline to edges */
   border: 10px solid #ffffff;
+  /* Make it curved around corners */
   border-radius: 25px;
+  /* Cover whole area defined earlier */
   width: 100%;
+  /* Update specific of track */
   height: 50px;
+  /* Change cursor when hovering over it */
   cursor: pointer;
 }
 
-/* The thumb (item) that the user can drag and move */
+/* Thumb - Style of the item that the user can drag and move */
 .difficultySlider::-webkit-slider-thumb {
   margin-top: -15px;
-  width: 60px;
+  /* Equal width and height as its a circle */
+  width: 60px; 
   height: 60px;
-  background: #b8ac54;
+  /* Cream yellow, darker than track */
+  background: #b8ac54; 
+  /* Add white outline to edges */
   border: 10px solid #ffffff;
+  /* To make it circular */  
   border-radius: 50px;
+  /* Change cursor when hovering over it */
   cursor: pointer;
   /* No special styling is applied - allow changes to go through as expected */
   -webkit-appearance: none; 
 }
 
+.startButton {
+  /* Vibrant yellow for contrast */
+  background-color:#e0d46c;
+  /* Change cursor when hovering over it */
+  cursor:pointer;
+  /* Make text white */    
+  color:#ffffff;
+  /* Change font style and size */
+  font-family:Arial;
+  font-size:28px;
+  font-weight:bold;
+  /* Increase the total size */
+  padding:22px 62px;
+  /* Add grey shadow to text */
+  text-shadow:2px 4px 0px #7c7434;
+}
 
 
 
 
-
-
-
-
-
-
-
+/*  */
+  /*  */
+  /*  */
+    /*  */
+    /*  */
+      /*  */
+      /*  */
 
