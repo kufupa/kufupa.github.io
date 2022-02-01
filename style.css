@@ -1,16 +1,7 @@
 html, body { /* Remove default spacing in web page, so canvas fills up whole screen */
   margin: 0;
   padding: 0;
-  
-  /* Allow us to change relative location on screen */
-  display: flex;
-  /* This centers our sketch horizontally. */
-  justify-content: center;
-
-  /* This centers our sketch vertically. */
-  align-items: center;
 }
-
 
 canvas { /* Display items using p5js correctly */
   display: block;
