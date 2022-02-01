@@ -184,6 +184,9 @@ function setup() { // Setup function - called once only
   difficultySlider = createSlider(1, 9, 5, 1); 
   // Add CSS styling to slider
   difficultySlider.addClass("difficultySlider"); 
+  // Initliase slider offscreen so that it is not visible
+  difficultySlider.position(-1000, -1000); 
+  
   
   // Create button with text "PLAY"
   startButton = createButton("PLAY");
@@ -191,6 +194,8 @@ function setup() { // Setup function - called once only
   startButton.addClass("startButton"); 
   // Add callback for when it is pressed
   startButton.mousePressed(exitMenuState);
+  // Initliase button offscreen so that it is not visible
+  startButton.position(-1000, -1000); 
   
 }
 
