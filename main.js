@@ -118,17 +118,27 @@ function displayLeaderboard(names, scores){
   
 }
 
+function displayContinueText(){
+      textSize(40); // Size of text - p5js procedure
+      fill(255, 255, 255); // Colour of text - lavender
+      // text("Click to continue", width/2-160, height/2+350); // Centered
+      text("Click to continue", 0, 40);
+}
+
 function menuScreens(screenVariable){ // For what to display on screen
     if (screenVariable == 0){ // Loading screen
       displayAndCentreImage(titleImage);
+      displayContinueText();
     } 
     else if (screenVariable == 1) { // Instructions screen
       displayAndCentreImage(instructionsImg);
+      displayContinueText();
     } 
     else if (screenVariable == 2) { // Leaderboard screen
       displayLeaderboard(leaderBoardNames, leaderBoardScores);
+      displayContinueText();
     } 
-    else if (screenVariable == 3) { // Difficulty screen
+    else if (screenVariable >= 3) { // Difficulty screen
       displayAndCentreImage(difficultyImg); // Background
       displayDifficultySlider(); // Show the slider
       displayStartButton(); // Show the start button
