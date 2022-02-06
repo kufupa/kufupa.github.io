@@ -11,6 +11,7 @@ let paused = false;
 let titleImage; // title & loading screen image
 let instructionsImg; // controls and game information image
 let difficultyImg; // pictures for the 3 difficulty icons
+let mazeImage; // START_GAME game state
 
 // Variables for leaderboard data
 let leaderBoardScores = []; // Scores sorted ascendingly
@@ -22,6 +23,29 @@ let screenVariable = 0; // Which screen to display
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
 let DIFFICULTY; // Difficulty value saved from slider
+
+// START-GAME game state variables
+let scoreCounter = 0;
+let levelCounter = 0;
+// Will take away DIFFICULTY/3 once DIFFICULTY has been assigned during runtime
+let lifeCounter = 6; 
+
+function createMaze(){
+  
+}
+
+function loadMaze(){ // Load and display maze screen
+  
+  mazeImage = loadImage("Assets/maze.jpg", 
+    // Resize the image to fit on the screen.                  
+    // Whole height of canvas and same proportion for width                  
+    mazeImage => {mazeImage.resize(0, height)} // Resize on successful callback
+  ); 
+  // Calculate resize width
+  // Keep aspect ratio for width, and use bitwise OR to convert to int
+  // newWidth = (mazeImage.width/mazeImage.height * height) | 0 
+  displayAndCentreImage(mazeImage); // Display it after the resize
+}
 
 // Load and display title screen
 function displayTitle(){ 
@@ -120,30 +144,33 @@ function displayLeaderboard(names, scores){
 
 function displayContinueText(){
       textSize(40); // Size of text - p5js procedure
-      fill(255, 255, 255); // Colour of text - lavender
+      fill(255, 255, 255); // Colour of text - white
       // text("Click to continue", width/2-160, height/2+350); // Centered
       text("Click to continue", 0, 40);
 }
 
 function menuScreens(screenVariable){ // For what to display on screen
-    if (screenVariable == 0){ // Loading screen
-      displayAndCentreImage(titleImage);
-      displayContinueText();
-    } 
-    else if (screenVariable == 1) { // Instructions screen
-      displayAndCentreImage(instructionsImg);
-      displayContinueText();
-    } 
-    else if (screenVariable == 2) { // Leaderboard screen
-      displayLeaderboard(leaderBoardNames, leaderBoardScores);
-      displayContinueText();
-    } 
-    else if (screenVariable >= 3) { // Difficulty screen
-      displayAndCentreImage(difficultyImg); // Background
-      displayDifficultySlider(); // Show the slider
-      displayStartButton(); // Show the start button
-      
-    } 
+  if (screenVariable == 0){ // Loading screen
+    displayAndCentreImage(titleImage);
+    displayContinueText();
+  } 
+  else if (screenVariable == 1) { // Instructions screen
+    displayAndCentreImage(instructionsImg);
+    displayContinueText();
+  } 
+  else if (screenVariable == 2) { // Leaderboard screen
+    displayLeaderboard(leaderBoardNames, leaderBoardScores);
+    displayContinueText();
+  } 
+  // Use >= so that extra clicks do not change screen
+  else if (screenVariable >= 3) { // Difficulty screen
+    displayAndCentreImage(difficultyImg); // Background
+    displayDifficultySlider(); // Show the slider
+    displayStartButton(); // Show the start button   
+  } 
+  else{
+    print("ERROR") // As this should never occur
+  }
   
 }
 
@@ -162,10 +189,13 @@ function displayStartButton(){
 function exitMenuState(){
   // Save the current difficulty value
   DIFFICULTY = difficultySlider.value(); 
+  // Change lifeCounter variable to account for difficulty
+  lifeCounter -= DIFFICULTY/3 | 0
   // Hide slider and button
   difficultySlider.remove();
   startButton.remove();
   gameState = "START_GAME"; // change gamestate
+  loadMaze(); // Load maze image and display it
 }
 
 // let slider;
@@ -230,11 +260,19 @@ function draw() { // Background loop - 60 times per second
     menuScreens(screenVariable); // Display new relevant item to screen
      
   }
-  
-  else if (gameState == "START_GAME"){
-    
+  else if (gameState == "START_GAME"){ // Game state
   }
   
 }
 
+
+
+// Set playerObject = new Pacman()
+// Display Pacman
+// Display maze
+// Load difficulty constant
+// 	Spawn that many ghosts
+// Generate all pellets
+// Display pellets
+// Set Game_state = PLAYING
 
