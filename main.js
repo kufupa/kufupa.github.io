@@ -261,6 +261,7 @@ function draw() { // Background loop - 60 times per second
      
   }
   else if (gameState == "START_GAME"){ // Game state
+    displayAndCentreImage(mazeImage);
   }
   
 }
