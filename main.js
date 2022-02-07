@@ -19,7 +19,7 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 0; // Which screen to display
+let screenVariable = 5; // Which screen to display
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
 let DIFFICULTY; // Difficulty value saved from slider
@@ -30,7 +30,101 @@ let levelCounter = 0;
 // Will take away DIFFICULTY/3 once DIFFICULTY has been assigned during runtime
 let lifeCounter = 6; 
 
+let maze; // Variable for 2D grid array
+
+function createMazeLines(){
+  stroke(255, 255, 0); // Change colour of line  
+  change = 29
+  
+  sy = 0
+  sx = 394
+  
+  // line(0, sy, width, sy); // horizontal
+  // line(sx, 0, sx, height); // Vertical
+  // line(0, sy + y, width, sy + y); // horizontal
+  // line(sx + x, 0, sx + x, height); // Vertical
+  rectNumber = 33
+  
+  for (let i=1; i<rectNumber; i++){
+    // line(x1, y1, x2, y2)
+    line(394, sy, width-394, sy); // horizontal
+    line(sx, 0, sx, height); // Vertical
+    sy += change
+    sx += change
+  }
+}
+
 function createMaze(){
+   
+  // Variable for grid data structure, using 2d array
+  // 1 is a wall
+  // 6 is a Path
+  // 0 is a regular pellet
+  // 8 is a Power pellet
+  maze = [ 
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 8, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 8, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 6, 1, 1, 6, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 6, 1, 1, 6, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 6, 6, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 6, 6, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 6, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
+  [1, 8, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 8, 1],
+  [1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1],
+  [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+  [1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ];
+  
+  rectSize = 29;
+  dx = rectSize;
+  dy = rectSize;
+  
+  // print(maze)
+  // Create x and y positions
+  // xPos = (width - 10*maze[0].len())/2 | 0;
+  // yPos = (height - rectSize*maze.len/2) | 0;
+  yPos = 0 - dy
+  
+  fill(0, 100, 255); // Colour the rectangles light blue
+  
+  for (let row of maze){
+    // print(row)
+    // print(rectSize, row.length, rectSize*row.length)
+    xPos = (width - rectSize*row.length)/2 | 0; // Reset x position
+    yPos += dy // Increment y position
+    
+    for (let node of row){
+      if (node == 1){ // If node is a grid
+        // Draw light blue rectangle at position
+        rect(xPos, yPos, rectSize);
+      }
+      // Else leave black as node will be something else
+      xPos += dx
+      // print(xPos)
+      
+    }
+    
+  }
   
 }
 
@@ -38,7 +132,7 @@ function loadMaze(){ // Load and display maze screen
   
   mazeImage = loadImage("Assets/maze.jpg", 
     // Resize the image to fit on the screen.                  
-    // Whole height of canvas and same proportion for width                  
+    // Whole height of canvas and same proportion for width 
     mazeImage => {mazeImage.resize(0, height)} // Resize on successful callback
   ); 
   // Calculate resize width
@@ -262,6 +356,8 @@ function draw() { // Background loop - 60 times per second
   }
   else if (gameState == "START_GAME"){ // Game state
     displayAndCentreImage(mazeImage);
+    // createMazeLines();
+    createMaze();
   }
   
 }
