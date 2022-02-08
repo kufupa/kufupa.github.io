@@ -95,7 +95,7 @@ function createMaze(){
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
   ];
   
-  rectSize = 29;
+  rectSize = 29; // 29 For same as image
   dx = rectSize;
   dy = rectSize;
   
@@ -105,7 +105,6 @@ function createMaze(){
   // yPos = (height - rectSize*maze.len/2) | 0;
   yPos = 0 - dy
   
-  fill(0, 100, 255); // Colour the rectangles light blue
   
   for (let row of maze){
     // print(row)
@@ -115,10 +114,18 @@ function createMaze(){
     
     for (let node of row){
       if (node == 1){ // If node is a grid
+        fill(0, 100, 255); // Colour the rectangles light blue
         // Draw light blue rectangle at position
         rect(xPos, yPos, rectSize);
+      } else if (node == 8){ // It is a power pellet
+        fill(255, 150, 0); // Colour the rectangles light blue
+        ellipse(xPos + rectSize/2, yPos + rectSize/2, rectSize);
+      } else if (node == 0){ // It is a power pellet
+        fill(255, 150, 0); // Colour the rectangles light blue
+        ellipse(xPos + rectSize/2, yPos + rectSize/2, rectSize/3);
       }
-      // Else leave black as node will be something else
+      
+      // Else leave black as node will be path
       xPos += dx
       // print(xPos)
       
