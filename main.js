@@ -33,7 +33,8 @@ let lifeCounter = 6;
 let maze; // Variable for 2D grid array
 
 
-function createMazeLines(){
+// Draw vertical and horizontal lines on maze to visualise grid data structure
+function createMazeLines(){ 
   stroke(255, 255, 0); // Change colour of line  
   change = 29
   
