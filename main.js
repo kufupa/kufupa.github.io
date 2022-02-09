@@ -31,6 +31,7 @@ let levelCounter = 0;
 let lifeCounter = 6; 
 
 let maze; // Variable for 2D grid array
+let player;
 
 
 // Draw vertical and horizontal lines on maze to visualise grid data structure
@@ -221,14 +222,28 @@ function exitMenuState(){
   loadMaze(); // Load maze image and display it
 }
 
-// let slider;
-// function setup() {
-// }
+function keyTyped() {
+  x = y = 0; // Multiple assigment
+  // Using logical OR "||" to make it non case sensitive
+  if (key === 'w' || key === "W") {
+    y = -1 // As moving up
+  } else if (key === 's' || key === "S") {
+    y = 1 // Moving down
+  } else if (key === 'a' || key === "A") {
+    x = -1 // Moving left
+  } else if (key === 'd' || key === "D") {
+    x = 1 // Moving right
+  }
+  
+  if (x!=0 || y!= 0){ // Valid input
+    player.setInput(x, y) // Call input method for player
+  }
+  
+  // To prevent any default behavior, return false
+  return false;
+}
 
-// function draw() {
-//   let val = slider.value();
-//   background(val);
-// }
+
 
 function setup() { // Setup function - called once only
   frameRate(FPS); // Refresh only at stated FPS
@@ -261,6 +276,7 @@ function setup() { // Setup function - called once only
   startButton.position(-1000, -1000); 
   
   maze = new Maze();
+  player = new Pacman();
 
   
 }
@@ -290,6 +306,14 @@ function draw() { // Background loop - 60 times per second
     displayAndCentreImage(mazeImage);
     // createMazeLines();
     maze.show() // Draw grid to screen
+    gameState = "PLAYING"
+  }
+  else if (gameState == "PLAYING"){ // Game state
+    displayAndCentreImage(mazeImage);
+    maze.show() // Draw grid to screen
+    player.show()
+    player.move()
+    
   }
   
 }
