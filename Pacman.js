@@ -74,8 +74,25 @@ class Pacman {
     // Check if can move onto node in that direction
     let nextNode = this.maze[this.j + this.vel.y][this.i + this.vel.x]
     if (nextNode!=1){ // - can if it is not a wall
-      this.updatePos()    
+      this.updatePos()
+      
+      switch(nextNode) {
+        case 6: // It is an empty path
+          return false;   
+        case 0: // 0 is a regular pellet 
+          this.score += 10; // Add 10 as worth regular
+          this.maze[this.j][this.i] = 6 // Set it to be eaten
+          return [this.i, this.j];
+        case 8: // 8 is a Power pellet
+          this.score += 50; // Add 50 as worth more
+          this.maze[this.j][this.i] = 6 // Set it to be eaten
+          return [this.i, this.j]; 
+        default:
+          print("ERROR")
+          while(1); // Do not exit as error
+      }  
     }
+    return false; // It did not move
     
 
 // 			If pellet in path

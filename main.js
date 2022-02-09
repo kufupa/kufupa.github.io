@@ -32,6 +32,7 @@ let lifeCounter = 6;
 
 let maze; // Variable for 2D grid array
 let player;
+let change = false;
 
 
 // Draw vertical and horizontal lines on maze to visualise grid data structure
@@ -312,7 +313,10 @@ function draw() { // Background loop - 60 times per second
     displayAndCentreImage(mazeImage);
     maze.show() // Draw grid to screen
     player.show()
-    player.move()
+    change = player.move()
+    if (change != false){
+      maze.grid[change[1]][change[0]] = 6 // Set it to be eaten
+    }
     
   }
   
