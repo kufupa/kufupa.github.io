@@ -74,18 +74,7 @@ class Pacman {
     // Check if can move onto node in that direction
     let nextNode = this.maze[this.j + this.vel.y][this.i + this.vel.x]
     if (nextNode!=1){ // - can if it is not a wall
-      this.updatePos()
-      switch(nextNode) {
-        case 6: // It is an empty path
-          // code block
-          break;
-        case y:
-          // code block
-          break;
-        default:
-          // code block
-      }
-      
+      this.updatePos()    
     }
     
 
