@@ -33,7 +33,7 @@ let lifeCounter = 6;
 let maze; // Variable for 2D grid array
 let player;
 let change = false;
-// let song;
+let song;
 
 // Draw vertical and horizontal lines on maze to visualise grid data structure
 function createMazeLines(){ 
@@ -278,7 +278,7 @@ function setup() { // Setup function - called once only
   
   maze = new Maze();
   player = new Pacman();
-  // song = loadSound('Assets/music.mp3'); // Load and play music once game begins
+  song = loadSound('Assets/music.m4a'); // Load and play music once game begins
 
   
 }
@@ -310,9 +310,10 @@ function draw() { // Background loop - 60 times per second
     // createMazeLines();
     maze.show() // Draw grid to screen
     gameState = "PLAYING"
+    song.play();
+    
   }
   else if (gameState == "PLAYING"){ // Game state
-    // song.play();
     displayAndCentreImage(mazeImage);
     maze.show() // Draw grid to screen
     player.show()
