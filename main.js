@@ -310,6 +310,8 @@ function draw() { // Background loop - 60 times per second
     maze.show() // Draw grid to screen
     gameState = "PLAYING"
     song = loadSound('Assets/music.mp3'); // Load and play music once game begins
+    song.play();
+
   }
   else if (gameState == "PLAYING"){ // Game state
     displayAndCentreImage(mazeImage);
