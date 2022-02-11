@@ -19,7 +19,7 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 5; // Which screen to display
+let screenVariable = 0; // Which screen to display
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
 let DIFFICULTY; // Difficulty value saved from slider
