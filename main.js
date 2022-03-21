@@ -19,7 +19,7 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 5; // Which screen to display
+let screenVariable = 0; // Which screen to display - DEFAULT = 0
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
 let DIFFICULTY; // Difficulty value saved from slider
@@ -305,15 +305,14 @@ function setup() { // Setup function - called once only
   frameRate(FPS); // Refresh only at stated FPS
   pixelDensity(1); // Compatability for different sized browsers
   createCanvas(canvasWidth, canvasHeight);
-  // displayTitle();
+  displayTitle();
   
   leaderBoardNames, leaderBoardScores = getTopPlayers(10);
   
   // Load instructions and Difficulty screens only once
   loadInstructions() ;
   loadDifficulty();
-  
-  gameState = "START_GAME"; // change gamestate
+  gameState = "MENU"; // change gamestate
   
   
   // Create slider with Min:1, Max:9, Default:5, Step:1
