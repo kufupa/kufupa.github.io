@@ -313,7 +313,7 @@ function setup() { // Setup function - called once only
   loadInstructions() ;
   loadDifficulty();
   
-  gameState = "MENU"; // change gamestate
+  gameState = "START_GAME"; // change gamestate
   
   
   // Create slider with Min:1, Max:9, Default:5, Step:1
