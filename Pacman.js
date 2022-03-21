@@ -130,7 +130,7 @@ class Pacman {
     fill(200, 200, 255); // Colour of text - lavender
     stroke(200, 200, 255); // Outline colour - lavender
     text("Score: "+String(this.score), 0, height); // Render text at bottom left of canvas
-    text("Level: "+String(this.level), width-100, height); // Render text at bottom left of canvas
+    text("Level: "+String(this.level), width-250, height); // Render text at bottom left of canvas
   }
 
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
