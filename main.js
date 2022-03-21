@@ -19,7 +19,7 @@ let leaderBoardNames = []; // Names, respective to score achieved
 let leaderBoardText = ""; // Text written or read from storage
 
 // Menu game state variables
-let screenVariable = 0; // Which screen to display
+let screenVariable = 5; // Which screen to display
 let mouseHeld = false;
 let difficultySlider; // Assigned to difficulty slider in background loop 
 let DIFFICULTY; // Difficulty value saved from slider
@@ -34,6 +34,34 @@ let maze; // Variable for 2D grid array
 let player;
 let change = false;
 let song;
+
+let blinky = [240,36,36]; // Blinky is red ghost
+let pinky = [256,188,220]; // Pinky is pink ghost
+let inky = [8,252,220]; // Inky is blue ghost
+let clyde = [256,180,76]; // Clyde is orange ghost
+
+let allGhosts = [blinky, clyde, pinky, inky];
+// Define array, not currently initialsed since number of ghosts decided based on difficulty input of user
+let ghostArray = []; 
+
+function countdownTimer(){
+  // setInterval(function(){ // also tried setTimeout
+  //   text("HEYO", width/2, height/2)
+  // } , 1000 )
+  for(let i = 0; i<60*5; i++){
+    switch(i){
+      case i<60*2:
+        break;
+      case i<60*3:
+        break;
+      case i<60*4:
+        break;
+      case i<60*5:
+        break;
+    }
+  }
+    
+}
 
 // Draw vertical and horizontal lines on maze to visualise grid data structure
 function createMazeLines(){ 
@@ -168,10 +196,28 @@ function displayLeaderboard(names, scores){
 }
 
 function displayContinueText(){
-      textSize(40); // Size of text - p5js procedure
-      fill(255, 255, 255); // Colour of text - white
-      // text("Click to continue", width/2-160, height/2+350); // Centered
-      text("Click to continue", 0, 40);
+  textSize(40); // Size of text - p5js procedure
+  fill(255, 255, 255); // Colour of text - white
+  // text("Click to continue", width/2-160, height/2+350); // Centered
+  text("Click to continue", 0, 40);
+}
+
+function displayEndScreen(){
+  background(0); // Black background, cover up previous frame
+  textSize(120); // Size of text - p5js procedure
+  fill(255, 255, 255); // Colour of text - white
+  // text("Click to continue", width/2-160, height/2+350); // Centered
+  let dy = 60;
+  let dx = 340;
+  text("GAME OVER", width/2-dx, height/2-dy-20);
+  
+  textSize(70); // Size of text - p5js procedure
+  fill(200, 200, 255); // Colour of text - lavender
+  stroke(200, 200, 255); // Outline colour - lavender
+  text("Score: "+String(player.score), width/2-dx, height/2+90-dy); // Render text at bottom left of canvas
+  text("Level: "+String(player.level), width/2-dx+490, height/2+90-dy)
+    
+  
 }
 
 function menuScreens(screenVariable){ // For what to display on screen
@@ -244,12 +290,22 @@ function keyTyped() {
   return false;
 }
 
+function generateGhosts(DIFFICULTY){
+  let numGhosts = (DIFFICULTY+1)/3||0 + 1; // Number of ghosts
+  for(let i = 0; i<numGhosts; i++){
+    let gho = new Ghost( i, allGhosts[i] ); // instantiate new ghost
+    ghostArray.push(gho); // Add ghost instance to array
+  }
+  print(ghostArray) // Debugging
+  
+}
 
 
 function setup() { // Setup function - called once only
   frameRate(FPS); // Refresh only at stated FPS
+  pixelDensity(1); // Compatability for different sized browsers
   createCanvas(canvasWidth, canvasHeight);
-  displayTitle();
+  // displayTitle();
   
   leaderBoardNames, leaderBoardScores = getTopPlayers(10);
   
@@ -259,7 +315,8 @@ function setup() { // Setup function - called once only
   
   gameState = "MENU"; // change gamestate
   
-  // Create slider with Min:1, Max:9, Default:5, Step:10
+  
+  // Create slider with Min:1, Max:9, Default:5, Step:1
   difficultySlider = createSlider(1, 9, 5, 1); 
   // Add CSS styling to slider
   difficultySlider.addClass("difficultySlider"); 
@@ -278,9 +335,9 @@ function setup() { // Setup function - called once only
   
   maze = new Maze();
   player = new Pacman();
-  song = loadSound('Assets/music.m4a'); // Load and play music once game begins
+  song = loadSound("Assets/music.m4a"); // Load and play music once game begins
 
-  
+
 }
 
 
@@ -310,30 +367,48 @@ function draw() { // Background loop - 60 times per second
     // createMazeLines();
     maze.show() // Draw grid to screen
     gameState = "PLAYING"
-    song.play();
+    song.play(); // Only start playing once - avoid too much memory usage
+    generateGhosts(DIFFICULTY); // Generate ghosts
     
   }
   else if (gameState == "PLAYING"){ // Game state
+    // countdownTimer() // TEST
+    background(0); // Apply black background & cover anything previously displayed
     displayAndCentreImage(mazeImage);
-    maze.show() // Draw grid to screen
-    player.show()
-    change = player.move()
-    if (change != false){
-      maze.grid[change[1]][change[0]] = 6 // Set it to be eaten
+    maze.show(); // Draw grid to screen
+    player.show(); // 
+    player.displayScore(); // Render current score as text to screen
+    change = player.move();
+    
+    for (let i in ghostArray){
+      ghostArray[i].show()
+    }
+    if (change) {
+      for (let i in ghostArray){
+        ghostArray[i].move()
+      }
+      if(change !== true){
+        maze.grid[change[1]][change[0]] = 6; // Set it to be eaten
+      }
     }
     
+    
+    // me = new Graph(); // initialise new test graph
+    // // Find fastest route between these two paths on grid
+    // a = me.aStar([player.i, player.j], [13, 11]); 
+    // me.showRoute(); // Display route
+    
+    // print(frameRate()) // Print current FPS to monitor performance
+  }
+  
+  else if (gameState == "GAME_OVER"){
+    displayEndScreen(); // Procedure for final end screen
   }
   
 }
 
 
 
-// Set playerObject = new Pacman()
-// Display Pacman
-// Display maze
 // Load difficulty constant
 // 	Spawn that many ghosts
-// Generate all pellets
-// Display pellets
-// Set Game_state = PLAYING
 

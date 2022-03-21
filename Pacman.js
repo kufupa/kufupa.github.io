@@ -16,7 +16,6 @@ class Pacman {
     this.xPos = 814.5-this.dy // Initial positions
     this.yPos = 681.5
     
-    
     this.pos= new p5.Vector(this.xPos, this.yPos); // create vector to store position for dynamic updating
     this.vel = new p5.Vector(1, 0); // Known speed it moves at
   
@@ -28,11 +27,13 @@ class Pacman {
     this.score = 0;
     this.gameOver = false;
     
-    this.maze = new Maze();
-    this.maze = this.maze.grid;  // Discard object, keep array
+    // this.maze = new Maze();
+    this.maze = maze.grid;  // Discard object, keep array
     
     this.moveTimer = 10;
     this.moveTime = 0;
+    
+    this.level = 1;
     
   }
   
@@ -78,7 +79,7 @@ class Pacman {
       
       switch(nextNode) {
         case 6: // It is an empty path
-          return false;   
+          return true;   
         case 0: // 0 is a regular pellet 
           this.score += 10; // Add 10 as worth regular
           this.maze[this.j][this.i] = 6 // Set it to be eaten
@@ -92,8 +93,8 @@ class Pacman {
           while(1); // Do not exit as error
       }  
     }
-    return false; // It did not move
-    
+    // It did not move - but should've so indicate ghosts must move
+    return true; // No change but still moved
 
 // 			If pellet in path
 // 				Increment score by 10
@@ -122,6 +123,14 @@ class Pacman {
     this.turnTo = new p5.Vector(x, y);
     this.turn = true; // Indicating when user input occured
     // print(this.turnTo.x, this.turnTo.y, this.vel.x, this.vel.y) // Check if they point to same thing
+  }
+  
+  displayScore(){
+    textSize(60); // Size of text - p5js procedure
+    fill(200, 200, 255); // Colour of text - lavender
+    stroke(200, 200, 255); // Outline colour - lavender
+    text("Score: "+String(this.score), 0, height); // Render text at bottom left of canvas
+    text("Level: "+String(this.level), width-100, height); // Render text at bottom left of canvas
   }
 
   //---------------------------------------------------------------------------------------------------------------------------------------------------------
