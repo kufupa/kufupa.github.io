@@ -29,6 +29,12 @@ STUFF TODO:
 
 
 
+
+
+
+SOME MORE RANDOM INFO - a small portion of the 35k words i wrote for this very basic project :)
+Feel free to do whatever u want though i don't mind if u wanna get spicy and switch it up
+
 `Level indicator:`
 
 Feature: 
