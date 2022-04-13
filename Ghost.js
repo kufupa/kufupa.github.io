@@ -86,7 +86,8 @@ class Ghost {
       // this.graph = new Graph();
       // Find fastest route and save it
       this.route = this.graph.aStar([this.i, this.j,], [player.i, player.j] );
-      if (this.moveTime>(10-DIFFICULTY)/3){
+      // When to move - based on difficulty
+      if (this.moveTime>(10-DIFFICULTY)/3){ 
         this.moveTime = 0; // Reset timer
         // Assign next node in route
         let next = this.route.pop(); 
