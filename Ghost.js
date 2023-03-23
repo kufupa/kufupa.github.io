@@ -70,6 +70,10 @@ class Ghost {
     
     endShape(); // No more lines to plot
   }
+
+  getTarget() {
+    return [player.i, player.j]; 
+  }
   
   move(){
     this.moveTime++; // Increment timer
@@ -85,7 +89,7 @@ class Ghost {
     else{ // Has been released
       // this.graph = new Graph();
       // Find fastest route and save it
-      this.route = this.graph.aStar([this.i, this.j,], [player.i, player.j] );
+      this.route = this.graph.aStar([this.i, this.j,], getTarget() );
       // When to move - based on difficulty
       if (this.moveTime>(10-DIFFICULTY)/3){ 
         this.moveTime = 0; // Reset timer
