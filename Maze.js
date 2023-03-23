@@ -3,7 +3,6 @@ class Maze{
     constructor(){
       this.rectSize = (height*29/900) | 0; // 29 at 900px height For same as image
       
-      
       // Variable for grid data structure, using 2d array
       // 1 is a wall
       // 6 is a Path
@@ -57,33 +56,32 @@ class Maze{
   
   
       for (let row of maze.grid){
-        // print(row)
-        // print(rectSize, row.length, rectSize*row.length)
         xPos = (width - dx*row.length)/2 | 0; // Reset x position
         yPos += dy // Increment y position
         strokeWeight(1); // Thickness of line - default
         for (let node of row){
-          if (node == 1){ // If node is a wall
-            fill(0, 100, 255); // Colour the rectangles light blue
-            stroke(0, 100, 255); // Outline
-            // Draw light blue rectangle at position
-            // rect(xPos, yPos, dx);
-            
-          } else if (node == 8){ // It is a power pellet
-            fill(255,220,118); // Colour the rectangles light blue
-            stroke(255,220,118); // Outline
-            ellipse(xPos + dx/2, yPos + dy/2, dx/1.2);
-            
-          } else if (node == 0){ // It is a regular pellet
-            fill(255, 150, 0); // Colour the rectangles light blue
-            stroke(255, 150, 0); // Outline
-            ellipse(xPos + dx/2, yPos + dy/2, dx/3);
-            
-          } 
-  
-          // Else leave black as node will be path
+          switch (node) {
+            case 1: // Node is a wall
+              fill(0, 100, 255); // Colour the rectangles light blue
+              stroke(0, 100, 255); // Outline
+              // Draw light blue rectangle at position
+              // rect(xPos, yPos, dx);
+              break;
+            case 8: // Node is a power pellet
+              fill(255,220,118); // Colour the rectangles light blue
+              stroke(255,220,118); // Outline
+              ellipse(xPos + dx/2, yPos + dy/2, dx/1.2);
+              break;
+            case 0: // Node is a regular pellet
+              fill(255, 150, 0); // Colour the rectangles light blue
+              stroke(255, 150, 0); // Outline
+              ellipse(xPos + dx/2, yPos + dy/2, dx/3);
+              break;
+            default:
+              // Do nothing as node will be path
+          }
+
           xPos += dx
-          // print(xPos)
   
         }
   

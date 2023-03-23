@@ -407,7 +407,6 @@ function draw() { // Background loop - 60 times per second
 }
 
 
-
 // Load difficulty constant
 // 	Spawn that many ghosts
 
